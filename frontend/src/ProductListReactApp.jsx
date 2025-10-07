@@ -48,7 +48,8 @@ function StarRating({ value, size = 16 }) {
   );
 }
 
-export default function ProductListApp({ apiEndpoint = "/products.json" }) {
+export default function ProductListApp({ apiEndpoint = "https://product-carousel-app-4k9g.vercel.app/api/products" }) {
+
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
