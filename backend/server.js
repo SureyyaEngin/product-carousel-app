@@ -6,12 +6,19 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const app = express();
 app.use(cors());
 app.use(express.json());
 
 // --- Load product data ---
-const products = JSON.parse(fs.readFileSync("./products.json", "utf-8"));
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const productsPath = path.join(__dirname, "products.json");
+const products = JSON.parse(fs.readFileSync(productsPath, "utf-8"));
+
 
 // --- Fetch live gold price (USD per gram) ---
 async function getGoldPriceUSD() {
