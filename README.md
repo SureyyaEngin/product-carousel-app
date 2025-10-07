@@ -6,7 +6,7 @@ A responsive **Product Carousel** application built with **React** on the fronte
 
 ## Live Demo
 
-Check out the live application here: [https://product-carousel-app-4k9g.vercel.app](https://product-carousel-app-4k9g.vercel.app)
+Check out the live application here: [https://product-carousel-app-7ira.vercel.app](https://product-carousel-app-7ira.vercel.app)
 
 ---
 
@@ -51,18 +51,3 @@ npm install
 ```bash
 npm run dev
 ```
----
-
-## Project Structure
-
-product-carousel-app/
-├─ backend/
-│  ├─ server.js
-│  ├─ products.json
-├─ frontend/
-│  ├─ src/
-│  │  ├─ productlistreact.jsx
-│  │  └─ ...
-├─ package.json
-├─ vercel.json
-└─ README.md
