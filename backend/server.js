@@ -16,7 +16,6 @@ const products = JSON.parse(fs.readFileSync("./products.json", "utf-8"));
 // --- Fetch live gold price (USD per gram) ---
 async function getGoldPriceUSD() {
   try {
-    // Alternative free API that gives USD per gram gold price
     const response = await axios.get("https://api.metals.live/v1/spot");
     const gold = response.data.find((item) => item.gold);
     const goldPricePerOunce = gold.gold; // USD per ounce
@@ -33,7 +32,6 @@ app.get("/api/products", async (req, res) => {
   try {
     const goldPrice = await getGoldPriceUSD();
 
-    // Compute price dynamically
     const result = products.map((p) => {
       const price = (p.popularityScore + 1) * p.weight * goldPrice;
       const popularity5 = (p.popularityScore * 5).toFixed(1);
@@ -57,5 +55,5 @@ app.get("/", (req, res) => {
   res.send("Product API is running 🚀");
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// ✅ Vercel requires this export
+export default app;
