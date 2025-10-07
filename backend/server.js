@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// ✅ Genişletilmiş CORS ayarı
+// ✅ CORS: tüm yolları kapsayan güvenli yapı
 app.use(
   cors({
     origin: "*",
@@ -21,12 +21,17 @@ app.use(
     allowedHeaders: ["Content-Type"],
   })
 );
-app.options("*", cors());
+
 app.use(express.json());
 
 // --- Load product data ---
 const productsPath = path.join(__dirname, "products.json");
-const products = JSON.parse(fs.readFileSync(productsPath, "utf-8"));
+let products = [];
+try {
+  products = JSON.parse(fs.readFileSync(productsPath, "utf-8"));
+} catch (err) {
+  console.error("Error reading products.json:", err.message);
+}
 
 // --- Fetch live gold price (USD per gram) ---
 async function getGoldPriceUSD() {
@@ -70,5 +75,5 @@ app.get("/", (req, res) => {
   res.send("Product API is running 🚀");
 });
 
-// ✅ Export for Vercel Serverless
+// ✅ Vercel Serverless export
 export default app;
