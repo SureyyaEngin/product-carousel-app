@@ -3,22 +3,21 @@ import cors from "cors";
 import fs from "fs";
 import axios from "axios";
 import dotenv from "dotenv";
-
-dotenv.config();
-
-app.use(cors());
-app.use(express.json());
-
-// --- Load product data ---
 import path from "path";
 import { fileURLToPath } from "url";
+
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// --- Load product data ---
 const productsPath = path.join(__dirname, "products.json");
 const products = JSON.parse(fs.readFileSync(productsPath, "utf-8"));
-
 
 // --- Fetch live gold price (USD per gram) ---
 async function getGoldPriceUSD() {
@@ -62,5 +61,5 @@ app.get("/", (req, res) => {
   res.send("Product API is running 🚀");
 });
 
-// ✅ Vercel requires this export
+// ✅ Export for Vercel Serverless
 export default app;
