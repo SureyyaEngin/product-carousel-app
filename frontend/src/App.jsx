@@ -14,7 +14,7 @@ function App() {
       </header>
 
       {/* render the product page, fetching local products.json */}
-      <ProductListApp apiEndpoint="http://localhost:5000/api/products" />
+      <ProductListApp apiEndpoint="https://product-carousel-app-4k9g.vercel.app/api/products" />
 
       
     </div>
